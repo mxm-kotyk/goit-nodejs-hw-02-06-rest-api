@@ -1,15 +1,16 @@
 import contactsService from "../models/contacts.js";
+import Contact from "../models/Contact.js";
 import { HttpError } from "../helpers/index.js";
 import { ctrlWrapper } from "../decorators/index.js";
 
 const getAll = async (req, res) => {
-  const result = await contactsService.listContacts();
+  const result = await Contact.find();
   res.json(result);
 };
 
 const getOne = async (req, res) => {
   const { contactId } = req.params;
-  const result = await contactsService.getContactById(contactId);
+  const result = await Contact.findById(contactId);
   if (!result) {
     throw HttpError(404);
   }
@@ -17,7 +18,7 @@ const getOne = async (req, res) => {
 };
 
 const add = async (req, res) => {
-  const result = await contactsService.addContact(req.body);
+  const result = await Contact.addContact(req.body);
   res.status(201).json(result);
 };
 
