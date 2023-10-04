@@ -3,9 +3,9 @@ import express from "express";
 import contactController from "../../controllers/contactsController.js";
 import { emptyBodyCheck } from "../../middlewares/index.js";
 import { validateBody } from "../../decorators/index.js";
-import { contactSchema } from "../../schemas/contactValidationSchema.js";
+import contactValidationSchema from "../../schemas/contactValidationSchema.js";
 
-const validateContact = validateBody(contactSchema);
+const validateContact = validateBody(contactValidationSchema);
 
 const router = express.Router();
 
