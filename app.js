@@ -1,8 +1,11 @@
 import express from "express";
 import logger from "morgan";
 import cors from "cors";
+import dotenv from "dotenv";
 
 import contactsRouter from "./routes/api/contacts.js";
+
+dotenv.config();
 
 const app = express();
 
@@ -19,7 +22,10 @@ app.use((req, res) => {
 });
 
 app.use((err, req, res, next) => {
-  res.status(err.status).json({ message: err.message });
+  console.log(err);
+  res
+    .status(err.status || 500)
+    .json({ message: err.message || "Server error" });
 });
 
 export default app;
