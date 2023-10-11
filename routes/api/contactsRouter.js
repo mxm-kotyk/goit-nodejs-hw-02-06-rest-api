@@ -1,32 +1,32 @@
 import express from "express";
 
-import contactController from "../../controllers/contactsController.js";
+import { contactController } from "../../controllers/index.js";
 import { emptyBodyCheck, validIdCheck } from "../../middlewares/index.js";
 import { validateBody } from "../../decorators/index.js";
 import {
   contactValidationSchema,
   contactUpdateFavoriteSchema,
-} from "../../models/Contact.js";
+} from "../../schemas/index.js";
 
 const validateContact = validateBody(contactValidationSchema);
 const validateContactFavorite = validateBody(contactUpdateFavoriteSchema);
 
 const router = express.Router();
 
-router.get("/", contactController.getAll);
+router.get("/", contactController.getAllContacts);
 
-router.get("/:contactId", validIdCheck, contactController.getOne);
+router.get("/:contactId", validIdCheck, contactController.getOneContact);
 
-router.post("/", emptyBodyCheck, validateContact, contactController.add);
+router.post("/", emptyBodyCheck, validateContact, contactController.addContact);
 
-router.delete("/:contactId", validIdCheck, contactController.remove);
+router.delete("/:contactId", validIdCheck, contactController.removeContact);
 
 router.put(
   "/:contactId",
   validIdCheck,
   emptyBodyCheck,
   validateContact,
-  contactController.update
+  contactController.updateContact
 );
 
 router.patch(
