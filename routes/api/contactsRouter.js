@@ -11,17 +11,30 @@ import {
 const validateContact = validateBody(contactValidationSchema);
 const validateContactFavorite = validateBody(contactUpdateFavoriteSchema);
 
-const router = express.Router();
+const contactsRouter = express.Router();
 
-router.get("/", contactController.getAllContacts);
+contactsRouter.get("/", contactController.getAllContacts);
 
-router.get("/:contactId", validIdCheck, contactController.getOneContact);
+contactsRouter.get(
+  "/:contactId",
+  validIdCheck,
+  contactController.getOneContact
+);
 
-router.post("/", emptyBodyCheck, validateContact, contactController.addContact);
+contactsRouter.post(
+  "/",
+  emptyBodyCheck,
+  validateContact,
+  contactController.addContact
+);
 
-router.delete("/:contactId", validIdCheck, contactController.removeContact);
+contactsRouter.delete(
+  "/:contactId",
+  validIdCheck,
+  contactController.removeContact
+);
 
-router.put(
+contactsRouter.put(
   "/:contactId",
   validIdCheck,
   emptyBodyCheck,
@@ -29,7 +42,7 @@ router.put(
   contactController.updateContact
 );
 
-router.patch(
+contactsRouter.patch(
   "/:contactId/favorite",
   validIdCheck,
   emptyBodyCheck,
@@ -37,4 +50,4 @@ router.patch(
   contactController.updateStatusContact
 );
 
-export default router;
+export default contactsRouter;
