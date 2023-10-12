@@ -1,4 +1,4 @@
-import Contact from "../../models/index.js";
+import { Contact } from "../../models/index.js";
 import { ctrlWrapper } from "../../decorators/index.js";
 
 const addContact = async (req, res) => {
