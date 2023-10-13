@@ -17,7 +17,7 @@ authRouter.post(
   "/register",
   emptyBodyCheck,
   validateSignUpUser,
-  authController.register
+  authController.registerUser
 );
 
 export default authRouter;

@@ -2,7 +2,7 @@ import { User } from "../../models/index.js";
 import { ctrlWrapper } from "../../decorators/index.js";
 import HttpError from "../../helpers/HttpError.js";
 
-const register = async (req, res) => {
+const registerUser = async (req, res) => {
   const { email } = req.body;
   const user = await User.findOne({ email });
 
@@ -17,4 +17,4 @@ const register = async (req, res) => {
   });
 };
 
-export default ctrlWrapper(register);
+export default ctrlWrapper(registerUser);

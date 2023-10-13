@@ -1,2 +1,2 @@
-export { default as register } from "./register.js";
-export { default as login } from "./login.js";
+export { default as registerUser } from "./registerUser.js";
+export { default as loginUser } from "./loginUser.js";
