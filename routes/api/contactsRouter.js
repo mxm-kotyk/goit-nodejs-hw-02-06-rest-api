@@ -1,7 +1,11 @@
 import express from "express";
 
 import { contactController } from "../../controllers/index.js";
-import { emptyBodyCheck, validIdCheck } from "../../middlewares/index.js";
+import {
+  authenticate,
+  emptyBodyCheck,
+  validIdCheck,
+} from "../../middlewares/index.js";
 import { validateBody } from "../../decorators/index.js";
 import {
   contactValidationSchema,
@@ -12,6 +16,8 @@ const validateContact = validateBody(contactValidationSchema);
 const validateContactFavorite = validateBody(contactUpdateFavoriteSchema);
 
 const contactsRouter = express.Router();
+
+contactsRouter.use(authenticate);
 
 contactsRouter.get("/", contactController.getAllContacts);
 
