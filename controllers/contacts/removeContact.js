@@ -4,8 +4,8 @@ import { ctrlWrapper } from "../../decorators/index.js";
 
 const removeContact = async (req, res) => {
   const { _id: owner } = req.user;
-  const { contactId } = req.params;
-  const result = await Contact.findOneAndDelete({ _id: contactId, owner });
+  const { id } = req.params;
+  const result = await Contact.findOneAndDelete({ _id: id, owner });
   if (!result) {
     throw HttpError(404);
   }

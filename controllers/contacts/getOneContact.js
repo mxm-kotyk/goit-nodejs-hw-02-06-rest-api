@@ -4,8 +4,8 @@ import { ctrlWrapper } from "../../decorators/index.js";
 
 const getOneContact = async (req, res) => {
   const { _id: owner } = req.user;
-  const { contactId } = req.params;
-  const result = await Contact.findOne({ _id: contactId, owner }).populate(
+  const { id } = req.params;
+  const result = await Contact.findOne({ _id: id, owner }).populate(
     "owner",
     "email"
   );

@@ -4,11 +4,8 @@ import { ctrlWrapper } from "../../decorators/index.js";
 
 const updateContact = async (req, res) => {
   const { _id: owner } = req.user;
-  const { contactId } = req.params;
-  const result = await Contact.findOneAndUpdate(
-    { _id: contactId, owner },
-    req.body
-  );
+  const { id } = req.params;
+  const result = await Contact.findOneAndUpdate({ _id: id, owner }, req.body);
   if (!result) {
     throw HttpError(404);
   }

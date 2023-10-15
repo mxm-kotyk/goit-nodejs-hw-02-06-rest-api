@@ -21,11 +21,7 @@ contactsRouter.use(authenticate);
 
 contactsRouter.get("/", contactController.getAllContacts);
 
-contactsRouter.get(
-  "/:contactId",
-  validIdCheck,
-  contactController.getOneContact
-);
+contactsRouter.get("/:id", validIdCheck, contactController.getOneContact);
 
 contactsRouter.post(
   "/",
@@ -34,14 +30,10 @@ contactsRouter.post(
   contactController.addContact
 );
 
-contactsRouter.delete(
-  "/:contactId",
-  validIdCheck,
-  contactController.removeContact
-);
+contactsRouter.delete("/:id", validIdCheck, contactController.removeContact);
 
 contactsRouter.put(
-  "/:contactId",
+  "/:id",
   validIdCheck,
   emptyBodyCheck,
   validateContact,
@@ -49,7 +41,7 @@ contactsRouter.put(
 );
 
 contactsRouter.patch(
-  "/:contactId/favorite",
+  "/:id/favorite",
   validIdCheck,
   emptyBodyCheck,
   validateContactFavorite,
