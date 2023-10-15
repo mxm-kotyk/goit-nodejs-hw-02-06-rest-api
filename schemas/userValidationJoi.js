@@ -15,3 +15,10 @@ export const userValidationSchema = Joi.object({
       "string.pattern.base": `invalid email format`,
     }),
 });
+
+export const userSubscriptionValidation = Joi.object({
+  subscription: Joi.string().valid("starter", "pro", "business").messages({
+    "string.empty": `"subscription" cannot be an empty field`,
+    "any.only": `"subscription" must be one of the following: "starter", "pro", "business"`,
+  }),
+});
