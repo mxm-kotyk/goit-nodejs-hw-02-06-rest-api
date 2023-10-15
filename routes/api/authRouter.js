@@ -1,7 +1,7 @@
 import express from "express";
 
 import { authController } from "../../controllers/index.js";
-import { emptyBodyCheck } from "../../middlewares/index.js";
+import { authenticate, emptyBodyCheck } from "../../middlewares/index.js";
 import { validateBody } from "../../decorators/index.js";
 import { userValidationSchema } from "../../schemas/index.js";
 
@@ -22,5 +22,7 @@ authRouter.post(
   validateUser,
   authController.loginUser
 );
+
+authRouter.get("/current", authenticate, authController.getCurrentUser);
 
 export default authRouter;
