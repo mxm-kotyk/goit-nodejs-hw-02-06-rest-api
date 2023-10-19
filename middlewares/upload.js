@@ -1,13 +1,13 @@
 import multer from "multer";
 import path from "path";
-import crypto from "crypto";
+import uniqid from "uniqid";
 
-const destination = path.resolve("temp");
+const destination = path.resolve("tmp");
 
 const storage = multer.diskStorage({
   destination,
   filename: (req, file, cb) => {
-    const uniquePrefix = crypto.randomUUID();
+    const uniquePrefix = uniqid.process();
     const filename = `${uniquePrefix}_${file.originalname}`;
     cb(null, filename);
   },
