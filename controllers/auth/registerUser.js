@@ -1,4 +1,5 @@
 import bcrypt from "bcryptjs";
+import gravatar from "gravatar";
 
 import { User } from "../../models/index.js";
 import { ctrlWrapper } from "../../decorators/index.js";
@@ -13,12 +14,24 @@ const registerUser = async (req, res) => {
   }
 
   const hashedPassword = await bcrypt.hash(password, 10);
+  const avatarURL = gravatar.url(email, {
+    protocol: "https",
+    size: 250,
+  });
 
-  const newUser = await User.create({ ...req.body, password: hashedPassword });
+  const newUser = await User.create({
+    ...req.body,
+    password: hashedPassword,
+    avatarURL,
+  });
 
   res.status(201);
   res.json({
-    user: { email: newUser.email, subscription: newUser.subscription },
+    user: {
+      email: newUser.email,
+      subscription: newUser.subscription,
+      avatarURL: newUser.avatarURL,
+    },
   });
 };
 
