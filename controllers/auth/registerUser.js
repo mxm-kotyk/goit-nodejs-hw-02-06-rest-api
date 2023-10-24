@@ -17,6 +17,7 @@ const registerUser = async (req, res) => {
   const avatarURL = gravatar.url(email, {
     protocol: "https",
     size: 250,
+    d: "robohash",
   });
 
   const newUser = await User.create({
