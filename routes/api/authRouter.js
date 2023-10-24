@@ -4,6 +4,7 @@ import { authController } from "../../controllers/index.js";
 import {
   authenticate,
   emptyBodyCheck,
+  upload,
   validIdCheck,
 } from "../../middlewares/index.js";
 import { validateBody } from "../../decorators/index.js";
@@ -42,6 +43,13 @@ authRouter.patch(
   emptyBodyCheck,
   validateSubscription,
   authController.updateUserSubscription
+);
+
+authRouter.patch(
+  "/avatars",
+  authenticate,
+  upload.single("avatar"),
+  authController.updateUserAvatar
 );
 
 export default authRouter;
