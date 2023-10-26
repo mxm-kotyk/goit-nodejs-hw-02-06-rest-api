@@ -11,10 +11,12 @@ import { validateBody } from "../../decorators/index.js";
 import {
   userSubscriptionValidation,
   userValidationSchema,
+  userResendVerification,
 } from "../../schemas/index.js";
 
 const validateUser = validateBody(userValidationSchema);
 const validateSubscription = validateBody(userSubscriptionValidation);
+const validateResendVerification = validateBody(userResendVerification);
 
 const authRouter = express.Router();
 
@@ -23,6 +25,14 @@ authRouter.post(
   emptyBodyCheck,
   validateUser,
   authController.registerUser
+);
+
+authRouter.get("/verify/:verificationToken", authController.verifyUser);
+
+authRouter.post(
+  "/verify",
+  validateResendVerification,
+  authController.resendVerificationEmail
 );
 
 authRouter.post(
