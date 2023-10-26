@@ -1,9 +1,14 @@
 import bcrypt from "bcryptjs";
 import gravatar from "gravatar";
+import uniqid from "uniqid";
 
 import { User } from "../../models/index.js";
 import { ctrlWrapper } from "../../decorators/index.js";
-import HttpError from "../../helpers/HttpError.js";
+import {
+  HttpError,
+  sendEmail,
+  verificationEmailTemplate,
+} from "../../helpers/index.js";
 
 const registerUser = async (req, res) => {
   const { email, password } = req.body;
@@ -20,11 +25,16 @@ const registerUser = async (req, res) => {
     d: "robohash",
   });
 
+  const verificationToken = uniqid();
+
   const newUser = await User.create({
     ...req.body,
     password: hashedPassword,
     avatarURL,
+    verificationToken,
   });
+
+  await sendEmail(verificationEmailTemplate(email, verificationToken));
 
   res.status(201);
   res.json({
