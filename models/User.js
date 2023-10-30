@@ -22,7 +22,15 @@ const usersSchema = new Schema(
       default: "starter",
     },
     token: String,
+    verify: {
+      type: Boolean,
+      default: false,
+    },
+    verificationToken: {
+      type: String,
+    },
   },
+
   { versionKey: false }
 );
 

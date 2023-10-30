@@ -22,3 +22,14 @@ export const userSubscriptionValidation = Joi.object({
     "any.only": `"subscription" must be one of the following: "starter", "pro", "business"`,
   }),
 });
+
+export const userResendVerification = Joi.object({
+  email: Joi.string()
+    .required()
+    .pattern(/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/)
+    .messages({
+      "string.empty": `"email" cannot be an empty field`,
+      "any.required": `missing required "email" field`,
+      "string.pattern.base": `invalid email format`,
+    }),
+});
